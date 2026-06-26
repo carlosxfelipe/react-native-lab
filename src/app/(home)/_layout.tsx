@@ -33,6 +33,12 @@ export default function HomeLayout() {
           // The back arrow automatically appears here!
         }}
       />
+      <Stack.Screen
+        name="promo"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

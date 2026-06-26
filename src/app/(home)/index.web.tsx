@@ -44,6 +44,15 @@ export default function HomeScreen() {
         >
           Go to Details
         </Button>
+        <Button
+          variant="tinted"
+          onPress={() => router.push("/promo")}
+          iconRight={(color) => (
+            <Icon name="arrow-right" size={18} color={color} animated={false} />
+          )}
+        >
+          Go to Promo
+        </Button>
       </ScrollView>
     </>
   );
