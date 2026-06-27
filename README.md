@@ -72,3 +72,11 @@ src/
 ├── constants/        # Tema, cores, constantes
 └── hooks/            # Hooks customizados
 ```
+
+## Estudo do Wizard e Stepper
+
+Para entender o funcionamento e a implementação do Wizard e do Stepper (fluxo em etapas), estude os seguintes arquivos:
+
+- **`src/app/(home)/wizard.tsx`**: Contém a tela principal do wizard, a orquestração de quais etapas exibir e a lógica de navegação/transição entre as telas.
+- **`src/components/stepper.tsx`**: O componente visual (UI) de progresso em formato de etapas (indicadores numéricos e as linhas que os conectam).
+- **`src/stores/wizard-store.ts`**: O gerenciamento de estado global para controlar o progresso do usuário no wizard.
