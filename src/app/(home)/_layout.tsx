@@ -39,6 +39,12 @@ export default function HomeLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="wizard"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

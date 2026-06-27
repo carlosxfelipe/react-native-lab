@@ -50,6 +50,15 @@ export default function HomeScreen() {
         >
           Go to Promo
         </Button>
+        <Button
+          variant="tinted"
+          onPress={() => router.push("/wizard")}
+          iconRight={(color) => (
+            <Icon name="arrow-right" size={18} color={color} animated={false} />
+          )}
+        >
+          Go to Wizard
+        </Button>
       </ScrollView>
     </>
   );
