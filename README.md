@@ -1,56 +1,74 @@
-# Welcome to your Expo app 👋
+# react-native-lab
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Laboratório de experimentos com React Native + Expo. Usado para explorar componentes, padrões de UI e funcionalidades do ecossistema Expo.
 
-## Get started
+## Stack
 
-1. Install dependencies
+- **Expo** `~56.0.12` / **Expo Router** `~56.2.11`
+- **React Native** `0.85.3` / **React** `19.2.3`
+- **Reanimated** `4.3.1` / **Gesture Handler** `~2.31.1`
+- **TypeScript** `~6.0.3`
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalação
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Executar
 
-### Other setup steps
+| Comando              | Descrição                                                         |
+| -------------------- | ----------------------------------------------------------------- |
+| `npm start`          | Inicia o Metro bundler (escolha a plataforma no terminal)         |
+| `npm run android`    | Compila e roda no dispositivo/emulador Android (dev build nativo) |
+| `npm run android:go` | Abre no Expo Go para Android                                      |
+| `npm run ios`        | Compila e roda no simulador iOS (dev build nativo)                |
+| `npm run ios:go`     | Abre no Expo Go para iOS                                          |
+| `npm run web`        | Inicia no navegador                                               |
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Build
 
-## Learn more
+### APK Android (release)
 
-To learn more about developing your project with Expo, look at the following resources:
+Gera o APK e salva em `apk/react-native-lab-v<versão>.apk`:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run build:android
+```
 
-## Join the community
+> Requer Android SDK configurado e variável `ANDROID_HOME` definida.
 
-Join our community of developers creating universal apps.
+Equivalente manual passo a passo:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo prebuild --platform android
+cd android && ./gradlew assembleRelease
+```
+
+### EAS Build (cloud)
+
+```bash
+npx eas build --platform android
+npx eas build --platform ios
+npx eas build --platform all
+```
+
+> Requer conta Expo e `eas-cli` instalado (`npm i -g eas-cli`).
+
+## Lint
+
+```bash
+npm run lint
+```
+
+## Estrutura
+
+```
+src/
+├── app/              # Rotas (Expo Router file-based)
+│   ├── (home)/       # Stack da tab Home
+│   └── _layout.tsx   # Root layout (Tabs)
+├── components/       # Componentes reutilizáveis
+├── constants/        # Tema, cores, constantes
+└── hooks/            # Hooks customizados
+```
