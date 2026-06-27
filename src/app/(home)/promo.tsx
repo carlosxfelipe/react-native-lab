@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Animated, Image, Platform, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ProductGrid } from "@/components/product-grid";
 import { ScrollHeader } from "@/components/scroll-header";
@@ -9,6 +10,7 @@ const BANNER_HEIGHT = 180;
 
 export default function PromoScreen() {
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const bannerOpacity = scrollY.interpolate({
@@ -46,6 +48,12 @@ export default function PromoScreen() {
         </View>
       </Animated.ScrollView>
 
+      <View
+        style={[
+          styles.statusBarFill,
+          { height: insets.top, backgroundColor: theme.background },
+        ]}
+      />
       <ScrollHeader
         scrollY={scrollY}
         title="Promos"
@@ -80,5 +88,12 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+  },
+  statusBarFill: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 3,
   },
 });

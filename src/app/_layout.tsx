@@ -1,5 +1,6 @@
 import { useFonts } from "expo-font";
 import { DarkTheme, DefaultTheme, Tabs, ThemeProvider } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { Icon } from "@/components/icon";
@@ -22,6 +23,7 @@ export default function TabLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <StatusBar style={scheme === "dark" ? "light" : "dark"} />
       <AnimatedSplashOverlay />
       <Tabs
         screenOptions={{
