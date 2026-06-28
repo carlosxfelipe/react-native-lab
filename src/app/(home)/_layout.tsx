@@ -26,13 +26,7 @@ export default function HomeLayout() {
           title: "Home",
         }}
       />
-      <Stack.Screen
-        name="details"
-        options={{
-          title: "Details",
-          // The back arrow automatically appears here!
-        }}
-      />
+
       <Stack.Screen
         name="promo"
         options={{
@@ -49,18 +43,9 @@ export default function HomeLayout() {
         name="flow-equipamento"
         options={{ title: "Equipamento" }}
       />
-      <Stack.Screen
-        name="flow-execucao"
-        options={{ title: "Execução" }}
-      />
-      <Stack.Screen
-        name="flow-missao"
-        options={{ title: "Missão" }}
-      />
-      <Stack.Screen
-        name="flow-venda"
-        options={{ title: "Venda" }}
-      />
+      <Stack.Screen name="flow-execucao" options={{ title: "Execução" }} />
+      <Stack.Screen name="flow-missao" options={{ title: "Missão" }} />
+      <Stack.Screen name="flow-venda" options={{ title: "Venda" }} />
     </Stack>
   );
 }
