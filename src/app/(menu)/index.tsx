@@ -1,13 +1,7 @@
 import { Stack } from "expo-router";
-import {
-  Linking,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Linking, Platform, ScrollView, StyleSheet, View } from "react-native";
 
+import { ActionCard } from "@/components/action-card";
 import { Icon } from "@/components/icon";
 import { ThemedText } from "@/components/themed-text";
 import { useTheme } from "@/hooks/use-theme";
@@ -44,47 +38,26 @@ export default function MenuScreen() {
           </ThemedText>
         </View>
 
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <Icon
-              name="information-outline"
-              size={24}
-              color={theme.text}
-              animated={false}
-            />
-            <ThemedText type="smallBold">Sobre o App</ThemedText>
-          </View>
-          <ThemedText type="small">React Native 0.85.3 | Expo 56</ThemedText>
-        </View>
+        <ActionCard
+          title="Sobre o App"
+          description="React Native 0.85.3 | Expo 56"
+          iconName="information-outline"
+        />
 
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <Icon
-              name="cog-outline"
-              size={24}
-              color={theme.text}
-              animated={false}
-            />
-            <ThemedText type="smallBold">Tema e Aparência</ThemedText>
-          </View>
-          <ThemedText type="small">
-            O modo claro e escuro é gerenciado automaticamente pelas definições
-            do seu sistema operacional.
-          </ThemedText>
-        </View>
+        <ActionCard
+          title="Tema e Aparência"
+          description="O modo claro e escuro é gerenciado automaticamente pelas definições do seu sistema operacional."
+          iconName="cog-outline"
+        />
 
-        <TouchableOpacity
-          style={styles.card}
+        <ActionCard
+          title="Código Fonte"
+          description="Acessar repositório no GitHub"
+          iconName="github"
           onPress={() =>
             Linking.openURL("https://github.com/carlosxfelipe/react-native-lab")
           }
-        >
-          <View style={styles.cardHeader}>
-            <Icon name="github" size={24} color={theme.text} animated={false} />
-            <ThemedText type="smallBold">Código Fonte</ThemedText>
-          </View>
-          <ThemedText type="small">Acessar repositório no GitHub</ThemedText>
-        </TouchableOpacity>
+        />
       </ScrollView>
     </>
   );
@@ -100,18 +73,5 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 8,
-  },
-  card: {
-    padding: 16,
-    borderRadius: 12,
-    gap: 8,
-    backgroundColor: "rgba(150, 150, 150, 0.1)",
-    borderWidth: 1,
-    borderColor: "rgba(150, 150, 150, 0.2)",
-  },
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
   },
 });

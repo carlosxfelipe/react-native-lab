@@ -1,7 +1,7 @@
 import { Stack, useRouter } from "expo-router";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import { Button } from "@/components/button";
+import { ActionCard } from "@/components/action-card";
 import { Icon } from "@/components/icon";
 import { ThemedText } from "@/components/themed-text";
 
@@ -34,26 +34,28 @@ export default function HomeScreen() {
         contentContainerStyle={styles.contentContainer}
         contentInsetAdjustmentBehavior="automatic"
       >
-        <ThemedText>Bem-vindo ao App</ThemedText>
+        <View style={styles.header}>
+          <ThemedText style={{ fontSize: 24, fontWeight: "bold" }}>
+            Bem-vindo ao App
+          </ThemedText>
+          <ThemedText type="small" style={{ opacity: 0.7, marginTop: 4 }}>
+            Explore as funcionalidades abaixo
+          </ThemedText>
+        </View>
 
-        <Button
-          variant="tinted"
+        <ActionCard
+          title="Banner Dinâmico"
+          description="Veja um exemplo de cabeçalho animado e interativo."
+          iconName="image-outline"
           onPress={() => router.push("/promo")}
-          iconRight={(color) => (
-            <Icon name="arrow-right" size={18} color={color} animated={false} />
-          )}
-        >
-          Banner com Header Dinâmico
-        </Button>
-        <Button
-          variant="tinted"
+        />
+
+        <ActionCard
+          title="Iniciar Novo Fluxo"
+          description="Navegue por um fluxo passo a passo estilo wizard."
+          iconName="play-circle-outline"
           onPress={() => router.push("/wizard")}
-          iconRight={(color) => (
-            <Icon name="arrow-right" size={18} color={color} animated={false} />
-          )}
-        >
-          Iniciar Novo Fluxo
-        </Button>
+        />
       </ScrollView>
     </>
   );
@@ -65,6 +67,9 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 16,
-    gap: 12,
+    gap: 16,
+  },
+  header: {
+    marginBottom: 8,
   },
 });
