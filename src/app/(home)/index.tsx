@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { Linking, Platform, ScrollView, StyleSheet } from "react-native";
+import { Platform, ScrollView, StyleSheet } from "react-native";
 
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
@@ -50,17 +50,6 @@ export default function HomeScreen() {
           )}
         >
           Iniciar Novo Fluxo
-        </Button>
-        <Button
-          variant="tinted"
-          onPress={() =>
-            Linking.openURL("https://github.com/carlosxfelipe/react-native-lab")
-          }
-          iconRight={(color) => (
-            <Icon name="github" size={18} color={color} animated={false} />
-          )}
-        >
-          Ver no GitHub
         </Button>
       </ScrollView>
     </>

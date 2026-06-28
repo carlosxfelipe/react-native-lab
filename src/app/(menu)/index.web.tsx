@@ -1,5 +1,11 @@
 import { Stack } from "expo-router";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  Linking,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { Icon } from "@/components/icon";
 import { ThemedText } from "@/components/themed-text";
@@ -68,6 +74,19 @@ export default function MenuScreen() {
             do seu sistema operacional.
           </ThemedText>
         </View>
+
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() =>
+            Linking.openURL("https://github.com/carlosxfelipe/react-native-lab")
+          }
+        >
+          <View style={styles.cardHeader}>
+            <Icon name="github" size={24} color={theme.text} animated={false} />
+            <ThemedText type="smallBold">Código Fonte</ThemedText>
+          </View>
+          <ThemedText type="small">Acessar repositório no GitHub</ThemedText>
+        </TouchableOpacity>
       </ScrollView>
     </>
   );
