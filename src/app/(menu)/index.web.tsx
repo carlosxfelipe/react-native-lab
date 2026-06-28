@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import { Icon } from "@/components/icon";
 import { ThemedText } from "@/components/themed-text";
@@ -31,7 +31,43 @@ export default function MenuScreen() {
         contentContainerStyle={styles.contentContainer}
         contentInsetAdjustmentBehavior="automatic"
       >
-        <ThemedText>Menu</ThemedText>
+        <View style={styles.header}>
+          <ThemedText style={{ fontSize: 24, fontWeight: "bold" }}>
+            Menu Principal
+          </ThemedText>
+          <ThemedText type="small" style={{ opacity: 0.7, marginTop: 4 }}>
+            Visão geral e ajustes.
+          </ThemedText>
+        </View>
+
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Icon
+              name="information-outline"
+              size={24}
+              color={theme.text}
+              animated={false}
+            />
+            <ThemedText type="smallBold">Sobre o App</ThemedText>
+          </View>
+          <ThemedText type="small">React Native 0.85.3 | Expo 56</ThemedText>
+        </View>
+
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Icon
+              name="cog-outline"
+              size={24}
+              color={theme.text}
+              animated={false}
+            />
+            <ThemedText type="smallBold">Tema e Aparência</ThemedText>
+          </View>
+          <ThemedText type="small">
+            O modo claro e escuro é gerenciado automaticamente pelas definições
+            do seu sistema operacional.
+          </ThemedText>
+        </View>
       </ScrollView>
     </>
   );
@@ -43,5 +79,22 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 16,
+    gap: 16,
+  },
+  header: {
+    marginBottom: 8,
+  },
+  card: {
+    padding: 16,
+    borderRadius: 12,
+    gap: 8,
+    backgroundColor: "rgba(150, 150, 150, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(150, 150, 150, 0.2)",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   },
 });
