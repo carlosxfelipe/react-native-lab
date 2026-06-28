@@ -141,7 +141,8 @@ export default function WizardScreen() {
 
       <View style={styles.headerSpacer} />
 
-      <Stepper steps={STEPS} currentStep={currentStep} />
+      {/* Passing onStepPress allows the user to tap completed steps to navigate backward */}
+      <Stepper steps={STEPS} currentStep={currentStep} onStepPress={goTo} />
 
       <View
         style={styles.pager}

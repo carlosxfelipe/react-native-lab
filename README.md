@@ -2,6 +2,8 @@
 
 Laboratório de experimentos com React Native + Expo. Usado para explorar componentes, padrões de UI e funcionalidades do ecossistema Expo.
 
+**Versão Web:** [https://react-native-lab.netlify.app/](https://react-native-lab.netlify.app/)
+
 ## Stack
 
 - **Expo** `~56.0.12` / **Expo Router** `~56.2.11`
