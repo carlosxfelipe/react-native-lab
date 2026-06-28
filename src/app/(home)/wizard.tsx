@@ -80,6 +80,11 @@ export default function WizardScreen() {
     currentStepRef.current = currentStep;
   }, [currentStep]);
 
+  // Instantly snap to the correct position when window width changes (resize)
+  useEffect(() => {
+    translateX.value = -currentStepRef.current * width;
+  }, [width, translateX]); // Using ref prevents animation bugs when the step changes
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
@@ -100,7 +105,11 @@ export default function WizardScreen() {
         if (completed < STEPS.length - 1) {
           goTo(completed + 1);
         } else {
-          router.back();
+          if (router.canGoBack()) {
+            router.back();
+          } else {
+            router.replace("/");
+          }
         }
       }
     });
@@ -115,7 +124,11 @@ export default function WizardScreen() {
     if (currentStep < STEPS.length - 1) {
       goTo(currentStep + 1);
     } else {
-      router.back();
+      if (router.canGoBack()) {
+        router.back();
+      } else {
+        router.replace("/");
+      }
     }
   };
 

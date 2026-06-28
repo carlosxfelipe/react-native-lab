@@ -12,8 +12,8 @@ import { Pressable, StyleSheet, useWindowDimensions, View } from "react-native";
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { Icon } from "@/components/icon";
 import { ThemedText } from "@/components/themed-text";
-import { Colors } from "@/constants/theme";
 import { BREAKPOINT } from "@/constants/layout";
+import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export default function WebLayout() {
@@ -45,18 +45,89 @@ export default function WebLayout() {
 
   const isDesktop = width >= BREAKPOINT;
 
-  // Scenario 1: Small screens (Mobile Web) -> Keep the Bottom Navigation Bar identical to the native app
-  if (!isDesktop) {
-    return (
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <AnimatedSplashOverlay />
-        <View
-          style={[styles.container, { backgroundColor: colors.background }]}
-        >
-          <View style={styles.content}>
-            <Slot />
+  // Unified Layout to prevent remounting of <Slot /> and losing child state
+  return (
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <AnimatedSplashOverlay />
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        {/* Top Navbar for Desktop */}
+        {isDesktop && (
+          <View
+            style={[
+              styles.navbar,
+              {
+                backgroundColor: colors.background,
+                borderBottomColor: colors.backgroundElement,
+              },
+            ]}
+          >
+            <View style={styles.logoContainer}>
+              <ThemedText style={styles.logoText}>Expo Starter</ThemedText>
+            </View>
+            <View style={styles.navLinks}>
+              {navItems.map((item) => {
+                const isActive =
+                  item.path === "/(menu)"
+                    ? (segments as string[]).includes("(menu)")
+                    : !(segments as string[]).includes("(menu)");
+                return (
+                  <Pressable
+                    key={item.path}
+                    onPress={() => router.push(item.path)}
+                    style={({ hovered }) => [
+                      styles.navItem,
+                      isActive && { borderBottomColor: colors.text },
+                      !isActive &&
+                        hovered && { borderBottomColor: colors.border },
+                      hovered && {
+                        backgroundColor: colors.backgroundElement + "40",
+                      },
+                    ]}
+                  >
+                    {({ hovered }) => (
+                      <>
+                        <Icon
+                          name={
+                            isActive || hovered
+                              ? item.activeIcon
+                              : item.inactiveIcon
+                          }
+                          size={20}
+                          color={
+                            isActive || hovered
+                              ? colors.text
+                              : colors.textSecondary
+                          }
+                        />
+                        <ThemedText
+                          style={[
+                            styles.navText,
+                            {
+                              color:
+                                isActive || hovered
+                                  ? colors.text
+                                  : colors.textSecondary,
+                            },
+                          ]}
+                        >
+                          {item.name}
+                        </ThemedText>
+                      </>
+                    )}
+                  </Pressable>
+                );
+              })}
+            </View>
           </View>
-          {/* Bottom Navbar */}
+        )}
+
+        {/* Main content area */}
+        <View style={styles.content}>
+          <Slot />
+        </View>
+
+        {/* Bottom Navbar for Mobile */}
+        {!isDesktop && (
           <View
             style={[
               styles.bottomNav,
@@ -99,90 +170,7 @@ export default function WebLayout() {
               );
             })}
           </View>
-        </View>
-      </ThemeProvider>
-    );
-  }
-
-  // Scenario 2: Large screens (Desktop/Tablet) -> Top Navbar
-
-  return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        {/* Top Navbar */}
-        <View
-          style={[
-            styles.navbar,
-            {
-              backgroundColor: colors.background,
-              borderBottomColor: colors.backgroundElement,
-            },
-          ]}
-        >
-          <View style={styles.logoContainer}>
-            <ThemedText style={styles.logoText}>Expo Starter</ThemedText>
-          </View>
-          <View style={styles.navLinks}>
-            {navItems.map((item) => {
-              const isActive =
-                item.path === "/(menu)"
-                  ? (segments as string[]).includes("(menu)")
-                  : !(segments as string[]).includes("(menu)");
-              return (
-                <Pressable
-                  key={item.path}
-                  onPress={() => router.push(item.path)}
-                  style={({ hovered }) => [
-                    styles.navItem,
-                    isActive && { borderBottomColor: colors.text },
-                    !isActive &&
-                      hovered && { borderBottomColor: colors.border },
-                    hovered && {
-                      backgroundColor: colors.backgroundElement + "40",
-                    },
-                  ]}
-                >
-                  {({ hovered }) => (
-                    <>
-                      <Icon
-                        name={
-                          isActive || hovered
-                            ? item.activeIcon
-                            : item.inactiveIcon
-                        }
-                        size={20}
-                        color={
-                          isActive || hovered
-                            ? colors.text
-                            : colors.textSecondary
-                        }
-                      />
-                      <ThemedText
-                        style={[
-                          styles.navText,
-                          {
-                            color:
-                              isActive || hovered
-                                ? colors.text
-                                : colors.textSecondary,
-                          },
-                        ]}
-                      >
-                        {item.name}
-                      </ThemedText>
-                    </>
-                  )}
-                </Pressable>
-              );
-            })}
-          </View>
-        </View>
-
-        {/* Main content area */}
-        <View style={styles.content}>
-          <Slot />
-        </View>
+        )}
       </View>
     </ThemeProvider>
   );
